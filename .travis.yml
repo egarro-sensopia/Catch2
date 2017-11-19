@@ -201,10 +201,11 @@ install:
     fi
 
 before_script:
-  # Regenerate single header file, so it is tested in the examples...
-  - python scripts/generateSingleHeader.py
   - export CXX=${COMPILER}
   - cd ${TRAVIS_BUILD_DIR}
+  # Regenerate single header file, so it is tested in the examples...
+  - python scripts/generateSingleHeader.py
+
   # Use Debug builds for running Valgrind and building examples
   - cmake -H. -BBuild-Debug -DCMAKE_BUILD_TYPE=Debug -Wdev -DUSE_CPP14=${CPP14} -DUSE_VALGRIND=${VALGRIND} -DBUILD_EXAMPLES=ON
   # Check that we don't miscompile with optimalizations...
