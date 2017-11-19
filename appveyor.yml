@@ -20,11 +20,6 @@ environment:
         - additional_flags: "/D_UNICODE /DUNICODE"
           wmain: 1
 
-        - additional_flags: ""
-          wmain: 0
-          env_build_examples: 1
-          env_no_selftest: 1
-
 matrix:
     exclude:
         - os: Visual Studio 2015
@@ -59,8 +54,9 @@ configuration:
 
 #Cmake will autodetect the compiler, but we set the arch
 before_build:
+  - python scripts/generateSingleHeader.py
   - set CXXFLAGS=%additional_flags%
-  - cmake -H. -BBuild -A%PLATFORM% -DUSE_WMAIN=%wmain% -DNO_SELFTEST=%env_no_selftest% -DBUILD_EXAMPLES=%env_build_examples%
+  - cmake -H. -BBuild -A%PLATFORM% -DUSE_WMAIN=%wmain% -DBUILD_EXAMPLES=ON
 
 # build with MSBuild
 build:
