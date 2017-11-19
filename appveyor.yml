@@ -25,14 +25,6 @@ matrix:
         - os: Visual Studio 2015
           additional_flags: "/permissive- /std:c++latest"
 
-        - os: Visual Studio 2015
-          env_build_examples: 1
-          env_no_selftest: 1
-
-        - configuration: Debug
-          env_build_examples: 1
-          env_no_selftest: 1
-
 init:
   - git config --global core.autocrlf input
   # Set build version to git commit-hash
